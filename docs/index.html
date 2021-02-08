@@ -1,0 +1,88 @@
+<html>
+  <head>
+    <title>canhazdb</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="http://127.0.0.1:9001/css/header.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/tomorrow.min.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
+    <script charset="UTF-8" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/languages/javascript.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', (event) => {
+        document.querySelectorAll('pre code').forEach((block) => {
+          hljs.highlightBlock(block);
+        });
+      });
+
+      function toggleBurgerMenu () {
+        document.body.classList.toggle('burger-open');
+      }
+    </script>
+    <base href="/" />
+
+    <link rel="icon" type="image/png" href="/img/favicon.png" />
+  </head>
+
+  <body>
+    <header class="menu-header">
+      <div class="header-brand">
+        <a href="/">
+          <img src="/img/logo.svg" class="logo-icon">
+          canhazdb
+        </a>
+      </div>
+      <div class="header-burger" onclick="toggleBurgerMenu()">
+        <svg viewBox="0 0 100 80" width="25" height="25">
+          <rect width="100" height="10"></rect>
+          <rect y="30" width="100" height="10"></rect>
+          <rect y="60" width="100" height="10"></rect>
+        </svg>
+      </div>
+      
+    <nav class="bugerable">
+      <a href="/" false>Home</a>
+      <a href="/docs" class="active">Docs</a>
+      <a href="/blog" false>Blog</a>
+    </nav>
+  
+    </header>
+
+    <main>
+      <div class="with-sidebar">
+        <div class="content thin">
+          <sidebar>
+      <ul>
+        <li>
+          <span>Developers</span>
+          <ul>
+            <li><a href="/">Introduction</a></li>
+            <li><a href="/guides/installing">Installing</a></li>
+          </ul>
+        </li>
+        <li>
+          <span>Architecture</span>
+          <ul>
+            <li><a href="/api/architecture/drivers">Drivers</a></li>
+          </ul>
+        </li>
+      </ul>
+    </sidebar>
+          
+          <section>
+          <div><h2 id="general-information">Documentation</h2>
+<p>A database in a can!</p>
+
+          </div>
+        </section>
+      </div>
+    </div>
+    </main>
+  </body>
+</html>
