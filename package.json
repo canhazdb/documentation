@@ -1,7 +1,7 @@
 {
   "name": "canhazdb-documentation",
   "version": "1.0.0",
-  "description": "",
+  "description": "This repository contains all the information found on canhazdb.com.",
   "main": "index.js",
   "scripts": {
     "start": "nodemon -i dist -e md,js,css,html index.js & ws -p 9001 -d dist",
@@ -21,5 +21,14 @@
     "nodemon": "^2.0.7",
     "vhtml": "^2.2.0",
     "virtual-dom": "^2.1.1"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/canhazdb/documentation.git"
+  },
+  "bugs": {
+    "url": "https://github.com/canhazdb/documentation/issues"
+  },
+  "homepage": "https://github.com/canhazdb/documentation#readme"
 }
