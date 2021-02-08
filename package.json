@@ -1,0 +1,25 @@
+{
+  "name": "canhazdb-documentation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon -i dist -e md,js,css,html index.js & ws -p 9001 -d dist",
+    "build": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "AGPL-3",
+  "dependencies": {
+    "date-fns": "^2.16.1",
+    "glob": "^7.1.6",
+    "hyperhtml": "^2.33.0",
+    "hyperx": "^2.5.4",
+    "local-web-server": "^4.2.1",
+    "marked": "^1.2.8",
+    "nodemon": "^2.0.7",
+    "vhtml": "^2.2.0",
+    "virtual-dom": "^2.1.1"
+  }
+}

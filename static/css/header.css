@@ -1,0 +1,152 @@
+/*
+  HEADER
+*/
+.user {
+  display: none;
+  text-align: right;
+  color: white;
+  padding: 3px;
+  padding-left: 10px;
+  padding-right: 7px;
+}
+
+.user a {
+  color: white;
+}
+
+.user-buttons {
+  display: none;
+}
+
+.user-buttons a:hover:not(.active) {
+  background-color: rgba(0, 0, 0, 0.20);
+}
+.user-buttons a.active {
+  background-color: rgba(0, 0, 0, 0.30);
+}
+
+.user-buttons a.primary.active {
+  background-color: #316922;
+}
+.user-buttons a.primary:hover:not(.active) {
+  background-color: #478536;
+}
+.user-buttons a.primary {
+  background-color: #5d994b;
+}
+
+nav, section {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+nav.bugerable {
+  flex-grow: 1;
+  display: none;
+  padding: 5px;
+
+  width: 100%;
+  flex-flow: column;
+}
+
+.burger-open nav.bugerable {
+  display: inherit;
+}
+
+header .logo a {
+  text-decoration: none;
+}
+
+h1 {
+  margin-top: 0;
+}
+h2 {
+  font-weight: 100;
+}
+
+header {
+  padding: 5px;
+  align-items: center;
+  background: #2f2f45;
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 10px;
+}
+
+header img.logo-icon {
+  width: 30px;
+  display:inline-block;
+  text-align: center;
+  vertical-align:middle;
+  margin-right: 10px;
+}
+
+header img.logo-name {
+  margin-right: 20px;
+  height: 30px;
+  width: 91.1083px;
+  display:inline-block;
+  text-align: center;
+  vertical-align:middle;
+}
+
+nav a.active {
+  background-color: rgb(0 191 255 / 51%);
+}
+nav a:hover:not(.active) {
+  background-color: rgba(255,255,255, 0.20);
+}
+nav a,
+.user-buttons a {
+  display: inline-block;
+  background-color: rgba(255,255,255, 0.05);
+  padding: 6px 10px 6px 10px;
+  border-radius: 5px;
+  color: white;
+  text-decoration: none;
+  margin-right: 5px;
+}
+
+.header-brand {
+  display: flex;
+  flex-grow: 1;
+  min-height: 45px;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.header-brand a {
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.header-burger {
+  cursor: pointer;
+  fill: white;
+  margin-right: 7px;
+}
+
+@media (min-width: 600px) {
+  nav.bugerable {
+    display: initial;
+    width: auto;
+  }
+
+  .user {
+    display: initial;
+  }
+
+  .user-buttons {
+    display: initial;
+  }
+
+  .header-burger {
+    display: none;
+  }
+
+  .header-brand {
+    flex-grow: 0;
+  }
+}
