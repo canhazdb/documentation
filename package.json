@@ -11,18 +11,17 @@
   "keywords": [],
   "author": "",
   "license": "AGPL-3",
-  "dependencies": {
-    "date-fns": "^2.16.1",
+  "devDependencies": {
+    "date-fns": "^2.17.0",
     "glob": "^7.1.6",
     "hyperhtml": "^2.33.0",
     "hyperx": "^2.5.4",
     "local-web-server": "^4.2.1",
-    "marked": "^1.2.8",
+    "marked": "^2.0.0",
     "nodemon": "^2.0.7",
     "vhtml": "^2.2.0",
     "virtual-dom": "^2.1.1"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/canhazdb/documentation.git"
