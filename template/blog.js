@@ -73,7 +73,7 @@ module.exports = async function generateBlog (h, createPage) {
     const content = marked(contentBody);
 
     const entryTree = h('',
-      h('div', {class: 'content-heading'},
+      h('div', { class: 'content-heading' },
         h('h1',
           metadata.title,
           h('small', 'Published by ',
@@ -86,9 +86,9 @@ module.exports = async function generateBlog (h, createPage) {
           h('a', { target: '_blank', class: 'edit-page', href: `https://github.com/canhazdb/documentation/blob/master/${path.join('./content/blog', entry.fullfile)}` },
             'Edit this page'
           ),
-          format(entry.date, 'yyyy-MM-dd') !== format(metadata.lastModified || entry.lastModified, 'yyyy-MM-dd')
-            && h('em', 'Last updated: ', format(metadata.lastModified || entry.lastModified, 'yyyy-MM-dd'))
-        ),
+          format(entry.date, 'yyyy-MM-dd') !== format(metadata.lastModified || entry.lastModified, 'yyyy-MM-dd') &&
+            h('em', 'Last updated: ', format(metadata.lastModified || entry.lastModified, 'yyyy-MM-dd'))
+        )
       ),
       h('div', { dangerouslySetInnerHTML: { __html: content } }, 'placeholder'),
       h('hr')
