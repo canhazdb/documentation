@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>canhazdb</title>
+    <title>Introduction</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
@@ -49,7 +49,7 @@
         
     <nav class="bugerable">
       <a href="/" false>Home</a>
-      <a href="/docs" class="active">Docs</a>
+      <a href="/docs" false>Docs</a>
       <a href="/blog" false>Blog</a>
     </nav>
   
@@ -57,9 +57,7 @@
     </header>
 
     <main>
-      <div class="with-sidebar">
-        <div class="content thin">
-          <sidebar>
+      <div class="with-sidebar"><div class="content thin"><sidebar>
       <ul>
         <li>
           <span>Developers</span>
@@ -75,16 +73,21 @@
           </ul>
         </li>
       </ul>
-    </sidebar>
-          
-          <section>
-          <div><h2 id="general-information">Documentation</h2>
-<p>A database in a can!</p>
-
-          </div>
-        </section>
-      </div>
-    </div>
+    </sidebar><section><h1>Introduction<small></small></h1><div class="content-info"><a target="_blank" class="edit-page" href="https://github.com/canhazdb/documentation/blob/master/content/guides/introduction.md">Edit this page</a><em>Last updated: 2021-02-10</em></div><div><p>I want canhazdb to have the following high level goals.</p>
+<h2 id="reliable">Reliable</h2>
+<p>The first obvious goal, is it should work. The project needs to be able to store and retrieve data objects over a RESTful API. If we can’t do that, we have failed.</p>
+<h2 id="intuitive">Intuitive</h2>
+<p>While I want this project to be fully documented, you should not need <strong>intense</strong> documentation to know how things work. It should be intuitive.</p>
+<p>For example, to create a new data object, you perform a standard HTTP post to <code>http://your_db_server/collectionName</code>.</p>
+<h2 id="manageable">Manageable</h2>
+<p>You shouldn’t have to have multiple projects and systems to host a database. This project should provide a full and complete database system, all in one.</p>
+<p>If you have to spend hours creating other nodes, discovering them, linking them together, health checking them, choosing replication factors, and other database admin jobs, then we have failed.</p>
+<h2 id="simple">Simple</h2>
+<p>The project doesn’t have to do everything. Schema’s, validation’s, relationships, stored procedures are not within the scope of this project.</p>
+<p>A database should provide you with a production ready system that stores data reliably.</p>
+<h2 id="welcoming">Welcoming</h2>
+<p>Anyone, no matter your level of experience, can ask questions, raise issues, give opinions and be involved in the project.</p>
+</div><hr></section></div></div>
     </main>
   </body>
 </html>
