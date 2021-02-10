@@ -7,7 +7,7 @@ module.exports = function (h) {
     <sidebar>
       <ul>
         <li>
-          <span>Developers</span>
+          <span>Guides</span>
           <ul>
             <li><a href="/guides/introduction">Introduction</a></li>
             <li><a href="/guides/installing">Installing</a></li>
