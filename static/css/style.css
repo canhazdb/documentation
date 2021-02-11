@@ -178,9 +178,7 @@ blockquote > p {
 
 pre > code {
   font-size: 110% !important;
-  background-color: rgba(0, 0, 0, 0.03) !important;
-  padding: 10px !important;
-  display: block;
+  padding: 10px;
 }
 
 .edit-page {
