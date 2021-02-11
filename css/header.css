@@ -84,6 +84,7 @@ header img.logo-icon {
   text-align: center;
   vertical-align:middle;
   margin-right: 10px;
+  margin-left: 10px;
 }
 
 header img.logo-name {
@@ -110,6 +111,7 @@ nav a,
   color: white;
   text-decoration: none;
   margin-right: 5px;
+  margin-bottom: 5px;
 }
 
 .header-brand {
@@ -137,6 +139,11 @@ nav a,
   nav.bugerable {
     display: initial;
     width: auto;
+  }
+
+  nav a,
+  .user-buttons a {
+    margin-bottom: 0;
   }
 
   .user {
