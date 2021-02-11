@@ -39,10 +39,10 @@ function homePage (h, createPage) {
             </p>
             
 
-<h2 id="help-canhazdb">Help Us</h2>
-<p>If you come across any bugs please help us by filing a Pull Request in github
-on our <a href="https://www.github.com/canhazdb/documentation">documentation repo</a>.</p>
-</div>
+            <h2 id="help-canhazdb">Help Us</h2>
+            <p>If you come across any bugs, please help us by filing a Pull Request in github
+            on our <a href="https://www.github.com/canhazdb/documentation">documentation repo</a>.</p>
+            </div>
           </section>
         </div>
       </div>
@@ -60,9 +60,8 @@ function docsPage (h, createPage) {
           ${sidebar(h)}
           
           <section>
-          <div><h2 id="general-information">Documentation</h2>
-<p>A database in a can!</p>
-
+            <div><h2 id="general-information">Documentation</h2>
+            <p>A database in a can!</p>
           </section>
         </div>
       </div>

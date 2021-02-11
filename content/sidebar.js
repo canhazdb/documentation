@@ -16,7 +16,7 @@ module.exports = function (h) {
         <li>
           <span>Architecture</span>
           <ul>
-            <li><a href="/api/architecture/drivers">Drivers</a></li>
+            <li><a href="/docs/architecture/drivers">Drivers</a></li>
           </ul>
         </li>
       </ul>

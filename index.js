@@ -19,10 +19,11 @@ const mainWebsiteUrl = process.env.MAIN_WEBSITE_URL || 'http://127.0.0.1:9001';
 const indexHtml = fs.readFileSync('template/index.html', 'utf8');
 
 function createPage (pathname, title, tree) {
+  const isDocs = pathname === '/docs' || pathname.startsWith('./docs') || pathname.startsWith('./guides');
   const nav = `
     <nav class="bugerable">
       <a href="/" ${pathname === '/' && 'class="active"'}>Home</a>
-      <a href="/docs" ${pathname.startsWith('/docs') && 'class="active"'}>Docs</a>
+      <a href="/docs" ${isDocs && 'class="active"'}>Docs</a>
       <a href="/blog" ${pathname.startsWith('/blog') && 'class="active"'}>Blog</a>
     </nav>
   `;

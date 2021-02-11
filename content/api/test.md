@@ -1,7 +1,7 @@
 ---
-id: docs
-title: Docs
-sidebar_label: Docs
+id: api
+title: Api
+sidebar_label: Api
 lastModified: 2021-02-08
 ---
 
