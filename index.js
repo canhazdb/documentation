@@ -25,6 +25,7 @@ function createPage (pathname, title, tree) {
       <a href="/" ${pathname === '/' && 'class="active"'}>Home</a>
       <a href="/docs" ${isDocs && 'class="active"'}>Docs</a>
       <a href="/blog" ${pathname.startsWith('/blog') && 'class="active"'}>Blog</a>
+      <a href="https://github.com/canhazdb/server/discussions">Community</a>
     </nav>
   `;
 
