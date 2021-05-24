@@ -12,12 +12,12 @@
   "author": "",
   "license": "AGPL-3",
   "devDependencies": {
-    "date-fns": "^2.17.0",
-    "glob": "^7.1.6",
-    "hyperhtml": "^2.33.0",
+    "date-fns": "^2.21.3",
+    "glob": "^7.1.7",
+    "hyperhtml": "^2.34.0",
     "hyperx": "^2.5.4",
     "local-web-server": "^4.2.1",
-    "marked": "^2.0.0",
+    "marked": "^2.0.5",
     "nodemon": "^2.0.7",
     "vhtml": "^2.2.0",
     "virtual-dom": "^2.1.1"

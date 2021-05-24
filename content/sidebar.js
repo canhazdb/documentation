@@ -11,6 +11,7 @@ module.exports = function (h) {
           <ul>
             <li><a href="/guides/introduction">Introduction</a></li>
             <li><a href="/guides/installing">Installing</a></li>
+            <li><a href="/guides/making-requests">Making Requests</a></li>
           </ul>
         </li>
         <li>

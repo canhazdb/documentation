@@ -65,7 +65,8 @@ h2 {
 }
 
 header {
-  background: #2f2f45;
+  background: #efefc8;
+  border-bottom: 10px solid #236e6e;
 }
 
 header > div {
@@ -77,30 +78,12 @@ header > div {
   flex-wrap: wrap;
   align-items: center;
 }
-
-header img.logo-icon {
-  width: 30px;
-  display:inline-block;
-  text-align: center;
-  vertical-align:middle;
-  margin-right: 10px;
-  margin-left: 10px;
-}
-
-header img.logo-name {
-  margin-right: 20px;
-  height: 30px;
-  width: 91.1083px;
-  display:inline-block;
-  text-align: center;
-  vertical-align:middle;
-}
-
 nav a.active {
-  background-color: rgb(0 191 255 / 51%);
+  background-color: rgb(255 255 255 / 75%);
+  font-weight: bold;
 }
 nav a:hover:not(.active) {
-  background-color: rgba(255,255,255, 0.20);
+  background-color: rgba(255,255,255, 0.30);
 }
 nav a,
 .user-buttons a {
@@ -108,7 +91,8 @@ nav a,
   background-color: rgba(255,255,255, 0.05);
   padding: 6px 10px 6px 10px;
   border-radius: 5px;
-  color: white;
+  color: #134444;
+  font-size: 20px;
   text-decoration: none;
   margin-right: 5px;
   margin-bottom: 5px;
@@ -119,19 +103,27 @@ nav a,
   flex-grow: 1;
   min-height: 45px;
   align-items: center;
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 .header-brand a {
-  color: white;
-  font-size: 20px;
+  display: flex;
+  place-items: center;
+  color: #236e6e;
+  font-size: 35px;
   text-decoration: none;
   font-weight: bold;
 }
 
+header img.logo-icon {
+  width: 100px;
+  margin-top: -10px;
+  margin-right: 10px;
+}
+
 .header-burger {
   cursor: pointer;
-  fill: white;
+  fill: black;
   margin-right: 7px;
 }
 
