@@ -91,7 +91,8 @@ nav a,
   background-color: rgba(255,255,255, 0.05);
   padding: 6px 10px 6px 10px;
   border-radius: 5px;
-  color: #134444;
+  color: #082b2b;
+  font-weight: 600;
   font-size: 20px;
   text-decoration: none;
   margin-right: 5px;
@@ -109,7 +110,7 @@ nav a,
 .header-brand a {
   display: flex;
   place-items: center;
-  color: #236e6e;
+  color: #082b2b;
   font-size: 35px;
   text-decoration: none;
   font-weight: bold;
