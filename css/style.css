@@ -176,9 +176,9 @@ blockquote > p {
   margin: 15px 0 16px;
 }
 
-pre > code {
-  font-size: 110% !important;
-  padding: 10px;
+.hljs {
+  padding: 15px;
+  font-size: 120%;
 }
 
 .edit-page {
