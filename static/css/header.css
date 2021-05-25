@@ -65,13 +65,12 @@ h2 {
 }
 
 header {
-  background: #efefc8;
   border-bottom: 10px solid #236e6e;
 }
 
 header > div {
   display: flex;
-  padding: 3px;
+  padding: 10px 0;
   max-width: 1200px;
   width: 100%;
   margin: 0 auto 0 auto;
@@ -79,11 +78,12 @@ header > div {
   align-items: center;
 }
 nav a.active {
-  background-color: rgb(255 255 255 / 75%);
+  background-color: #236e6e;
+  color: white;
   font-weight: bold;
 }
 nav a:hover:not(.active) {
-  background-color: rgba(255,255,255, 0.30);
+  background-color: rgba(0,0,0, 0.05);
 }
 nav a,
 .user-buttons a {
@@ -92,7 +92,7 @@ nav a,
   padding: 6px 10px 6px 10px;
   border-radius: 5px;
   color: #082b2b;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 20px;
   text-decoration: none;
   margin-right: 5px;
