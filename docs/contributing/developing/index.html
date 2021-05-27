@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>canhazdb</title>
+    <title>Developing</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
@@ -48,8 +48,8 @@
         </div>
         
     <nav class="bugerable">
-      <a href="/" class="active">Home</a>
-      <a href="/docs" false>Docs</a>
+      <a href="/" false>Home</a>
+      <a href="/docs" class="active">Docs</a>
       <a href="/blog" false>Blog</a>
       <a href="https://github.com/canhazdb/server/discussions">Community</a>
     </nav>
@@ -58,9 +58,7 @@
     </header>
 
     <main>
-      <div class="with-sidebar">
-        <div class="content thin">
-          <sidebar>
+      <div class="with-sidebar"><div class="content thin"><sidebar>
       <ul>
         <li>
           <span>Guides</span>
@@ -89,44 +87,30 @@
           </ul>
         </li>
       </ul>
-    </sidebar>
-          
-          <section>
-          <div>
-            <h2 id="general-information">What is canhazdb?</h2>
-            <p>
-              The goal of canhazdb is to create a production ready database that&apos;s easy
-              to install, manage and use.
-            </p>
-
-            <h2>Quick start?</h2>
-            <p>
-              The fastest way to get started is to use the official docker image.
-            </p>
-            <p>
-              You can run the command below on any machine that has docker installed:
-            </p>
-            <pre><code class="language-bash">docker run -itp 8060:8060 canhazdb/server --single</code></pre>
-            <p>
-              Once running, you can start doing GET, POST, PUT, PATCH, DELETE http
-              requests at:
-            </p>
-            <a href="http://localhost:8060/exampleCollection">http://localhost:8060/exampleCollection</a>
-
-            <h2>Learn more?</h2>
-            <p>
-              You can start your learning journey on the 
-              <a href="/guides/introduction">introduction</a> page.
-            </p>
-            
-
-            <h2 id="help-canhazdb">Help Us</h2>
-            <p>If you come across any bugs, please help us by filing a Pull Request in github
-            on our <a href="https://www.github.com/canhazdb/documentation">documentation repo</a>.</p>
-            </div>
-          </section>
-        </div>
-      </div>
+    </sidebar><section><h1>Developing<small></small></h1><div class="content-info"><a target="_blank" class="edit-page" href="https://github.com/canhazdb/documentation/blob/master/content/docs/contributing/developing.md">Edit this page</a><em>Last updated: 2021-05-27</em></div><div><p>There are a few different ways you can install canhazdb, depending on your individual use case.</p>
+<h1 id="developers">Developers</h1>
+<p>As a developer, you will probably want to install the database on your local machine, so you can edit source code and run the tests immediately.</p>
+<h2 id="dependencies">Dependencies</h2>
+<p>Other than a working operating system, the only dependency you need to have installed is <a href="https://nodejs.org/en/">NodeJS</a> (<a href="https://github.com/nvm-sh/nvm">12 or higher</a>).</p>
+<h2 id="source-code">Source Code</h2>
+<p>You can clone and install the code base by running the following commands in your terminal.</p>
+<pre><code class="language-bash">git clone https://github.com/canhazdb/server.git canhazdb-server
+cd canhazdb-server
+npm install
+</code></pre>
+<p>Once installed, you should run the tests, to make sure everything is working fine.</p>
+<pre><code class="language-bash">npm run test
+</code></pre>
+<p>To run the database normally, you can execute the CLI using the command below:</p>
+<pre><code class="language-bash">node lib/cli.js --help
+</code></pre>
+<p>Alternatively you can link the cli globally:</p>
+<pre><code class="language-bash">npm link
+</code></pre>
+<p>This will allow you to run from anywhere on your computer:</p>
+<pre><code class="language-bash">canhazdb-server --help
+</code></pre>
+</div><hr></section></div></div>
     </main>
   </body>
 </html>

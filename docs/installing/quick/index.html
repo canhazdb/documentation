@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Installing</title>
+    <title>Quick</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
@@ -64,8 +64,20 @@
           <span>Guides</span>
           <ul>
             <li><a href="/guides/introduction">Introduction</a></li>
-            <li><a href="/guides/installing">Installing</a></li>
             <li><a href="/guides/making-requests">Making Requests</a></li>
+          </ul>
+        </li>
+        <li>
+          <span>Installing</span>
+          <ul>
+            <li><a href="/docs/installing/quick">Quick</a></li>
+            <li><a href="/docs/installing/cluster">Cluster</a></li>
+          </ul>
+        </li>
+        <li>
+          <span>Contributing</span>
+          <ul>
+            <li><a href="/docs/contributing/developing">Developing</a></li>
           </ul>
         </li>
         <li>
@@ -75,29 +87,16 @@
           </ul>
         </li>
       </ul>
-    </sidebar><section><h1>Installing<small></small></h1><div class="content-info"><a target="_blank" class="edit-page" href="https://github.com/canhazdb/documentation/blob/master/content/guides/installing.md">Edit this page</a><em>Last updated: 2021-02-11</em></div><div><p>There are a few different ways you can install canhazdb, depending on your individual use case.</p>
-<h1 id="developers">Developers</h1>
-<p>As a developer, you will probably want to install the database on your local machine, so you can edit source code and run the tests immediately.</p>
-<h2 id="dependencies">Dependencies</h2>
-<p>Other than a working operating system, the only dependency you need to have installed is <a href="https://nodejs.org/en/">NodeJS</a> (<a href="https://github.com/nvm-sh/nvm">12 or higher</a>).</p>
-<h2 id="source-code">Source Code</h2>
-<p>You can clone and install the code base by running the following commands in your terminal.</p>
-<pre><code class="language-bash">git clone https://github.com/canhazdb/server.git canhazdb-server
-cd canhazdb-server
-npm install
+    </sidebar><section><h1>Quick<small></small></h1><div class="content-info"><a target="_blank" class="edit-page" href="https://github.com/canhazdb/documentation/blob/master/content/docs/installing/quick.md">Edit this page</a><em>Last updated: 2021-05-27</em></div><div><p>If you want to bring up an instance of canhazdb with the minimal configuration required, you can pass the <code>--single</code> argument to the command.</p>
+<p>This will not run the server behind TLS, therefore the traffic will not be encrypted or authenticated.</p>
+<p>This mode is best used in a learning or development environment, and not for production.</p>
+<h2 id="install">Install</h2>
+<p>You can run the command below on any machine that has docker installed:</p>
+<pre><code class="language-bash">docker run -itp 8060:8060 canhazdb/server --single
 </code></pre>
-<p>Once installed, you should run the tests, to make sure everything is working fine.</p>
-<pre><code class="language-bash">npm run test
-</code></pre>
-<p>To run the database normally, you can execute the CLI using the command below:</p>
-<pre><code class="language-bash">node lib/cli.js --help
-</code></pre>
-<p>Alternatively you can link the cli globally:</p>
-<pre><code class="language-bash">npm link
-</code></pre>
-<p>This will allow you to run from anywhere on your computer:</p>
-<pre><code class="language-bash">canhazdb-server --help
-</code></pre>
+<p>Once running, you can start doing GET, POST, PUT, PATCH, DELETE http
+requests at:</p>
+<p><a href="http://localhost:8060/exampleCollection">http://localhost:8060/exampleCollection</a></p>
 </div><hr></section></div></div>
     </main>
   </body>

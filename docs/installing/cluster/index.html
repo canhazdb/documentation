@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Api</title>
+    <title>Cluster</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
@@ -49,7 +49,7 @@
         
     <nav class="bugerable">
       <a href="/" false>Home</a>
-      <a href="/docs" false>Docs</a>
+      <a href="/docs" class="active">Docs</a>
       <a href="/blog" false>Blog</a>
       <a href="https://github.com/canhazdb/server/discussions">Community</a>
     </nav>
@@ -87,7 +87,76 @@
           </ul>
         </li>
       </ul>
-    </sidebar><section><h1>Api<small></small></h1><div class="content-info"><a target="_blank" class="edit-page" href="https://github.com/canhazdb/documentation/blob/master/content/api/test.md">Edit this page</a><em>Last updated: 2021-02-08</em></div><div><p>Documentation goes here</p>
+    </sidebar><section><h1>Cluster<small></small></h1><div class="content-info"><a target="_blank" class="edit-page" href="https://github.com/canhazdb/documentation/blob/master/content/docs/installing/cluster.md">Edit this page</a><em>Last updated: 2021-05-27</em></div><div><p>This document will explain how to setup a secure canhazdb cluster.</p>
+<h2 id="certificates">Certificates</h2>
+<p>To run a secure cluster, we first need to generate some public/private certificates.</p>
+<p>For this example, I&#39;ll create a folder in my documents.</p>
+<pre><code class="language-bash">cd ~/Documents
+mkdir canhazdb-example
+</code></pre>
+<p>Let&#39;s use the script to create our certificates.</p>
+<p>Replace the IP address <code>192.168.1.6</code> with the correct IP address (the one your database will listen on).</p>
+<p>Because of how containers work, using <code>localhost</code> with docker will not work.</p>
+<pre><code class="language-bash">openssl genrsa -out ca.privkey.pem 2048
+
+openssl req \
+  -x509 \
+  -new \
+  -nodes \
+  -key \
+  ca.privkey.pem \
+  -days \
+  1024 -out ca.cert.pem -subj &quot;/C=US/ST=Utah/L=Provo/O=ACME Signing Authority Inc/CN=example.com&quot;
+
+openssl genrsa -out 192.168.1.6.privkey.pem 2048
+
+openssl req -new \
+ -key 192.168.1.6.privkey.pem \
+ -out 192.168.1.6.csr.pem \
+ -subj &quot;/C=US/ST=Utah/L=Provo/O=ACME Tech Inc/CN=192.168.1.6&quot;
+
+openssl x509 \
+ -req -in 192.168.1.6.csr.pem \
+ -extfile &lt;(printf &quot;subjectAltName=IP:192.168.1.6&quot;) \
+ -CA ca.cert.pem \
+ -CAkey ca.privkey.pem \
+ -CAcreateserial \
+ -out 192.168.1.6.cert.pem \
+ -days 500
+</code></pre>
+<p>This command should create the following files in the current working directory.</p>
+<pre><code>192.168.1.6.cert.pem  192.168.1.6.csr.pem  192.168.1.6.privkey.pem  ca.cert.pem  ca.cert.srl  ca.privkey.pem
+</code></pre>
+<h3 id="starting-the-first-node">Starting the first node</h3>
+<p>The following command will start your first canhazdb node in your new cluster.</p>
+<pre><code class="language-bash">docker run -v `pwd`:/app/certs -p 7061:7061 -p 8061:8061 canhazdb/server \
+  --driver canhazdb-driver-ejdb \
+  --host 192.168.1.6 \
+  --port 7061 \
+  --query-port 8061 \
+  --join 192.168.1.6:7061 \
+  --data-dir ./canhazdb/one \
+  --tls-ca ./certs/ca.cert.pem \
+  --tls-cert ./certs/192.168.1.6.cert.pem \
+  --tls-key ./certs/192.168.1.6.privkey.pem
+</code></pre>
+<p>Once running, you can start doing GET, POST, PUT, PATCH, DELETE http
+requests at:</p>
+<p><a href="http://192.168.1.6:8060/exampleCollection">http://192.168.1.6:8060/exampleCollection</a></p>
+<h3 id="adding-an-additional-node">Adding an additional node</h3>
+<p>The following command will add an additional node node to your new cluster.</p>
+<pre><code class="language-bash">docker run -v `pwd`:/app/certs -p 7062:7062 -p 8062:8062 canhazdb/server \
+  --driver canhazdb-driver-ejdb \
+  --host 192.168.1.6 \
+  --port 7062 \
+  --query-port 8062 \
+  --join 192.168.1.6:7061 \
+  --join 192.168.1.6:7062 \
+  --data-dir ./canhazdb/two \
+  --tls-ca ./certs/ca.cert.pem \
+  --tls-cert ./certs/192.168.1.6.cert.pem \
+  --tls-key ./certs/192.168.1.6.privkey.pem
+</code></pre>
 </div><hr></section></div></div>
     </main>
   </body>
