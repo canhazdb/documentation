@@ -6,9 +6,6 @@ path: Docs / Contributing / Developing
 lastModified: 2021-05-27
 ---
 
-There are a few different ways you can install canhazdb, depending on your individual use case.
-
-# Developers
 As a developer, you will probably want to install the database on your local machine, so you can edit source code and run the tests immediately.
 
 ## Dependencies
