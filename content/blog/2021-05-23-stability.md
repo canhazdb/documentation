@@ -1,7 +1,7 @@
 ---
 title: Stability
 author: Mark Wylde
-authorURL: http://twitter.com/markiswylde
+authorURL: https://markwylde.com
 ---
 
 I have updated the dependencies of canhazdb and worked on this docs website, to:
