@@ -125,7 +125,7 @@ header img.logo-icon {
 .header-burger {
   cursor: pointer;
   fill: black;
-  margin-right: 7px;
+  margin-right: 20px;
 }
 
 @media (min-width: 600px) {

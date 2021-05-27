@@ -1,8 +1,9 @@
 ---
 id: install
-title: Installing
-sidebar_label: Installing
-lastModified: 2021-02-11
+title: Developing
+sidebar_label: Developing
+path: Docs / Contributing / Developing
+lastModified: 2021-05-27
 ---
 
 There are a few different ways you can install canhazdb, depending on your individual use case.
