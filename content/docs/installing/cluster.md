@@ -60,7 +60,7 @@ This command should create the following files in the current working directory.
 192.168.1.6.cert.pem  192.168.1.6.csr.pem  192.168.1.6.privkey.pem  ca.cert.pem  ca.cert.srl  ca.privkey.pem
 ```
 
-### Starting the first node
+## Starting the first node
 
 The following command will start your first canhazdb node in your new cluster.
 
@@ -82,7 +82,7 @@ requests at:
 
 [http://192.168.1.6:8060/exampleCollection](http://192.168.1.6:8060/exampleCollection)
 
-### Adding an additional node
+## Adding an additional node
 
 The following command will add an additional node node to your new cluster.
 
