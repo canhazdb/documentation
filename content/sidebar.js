@@ -16,7 +16,7 @@ module.exports = function (h) {
         <li>
           <span>Installing</span>
           <ul>
-            <li><a href="/docs/installing/quick">Quick</a></li>
+            <li><a href="/docs/installing/quick">Quickstart</a></li>
             <li><a href="/docs/installing/cluster">Cluster</a></li>
           </ul>
         </li>

@@ -30,7 +30,7 @@ function createPage (pathname, title, tree) {
   `;
 
   const page = indexHtml
-    .replace('{{title}}', title)
+    .replace('{{title}}', title + ' - canhazdb')
     .replace('{{content}}', tree)
     .replace('{{nav}}', nav)
     .replace('{{mainWebsiteUrl}}', mainWebsiteUrl);

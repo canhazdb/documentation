@@ -4,7 +4,7 @@ const sidebar = require('./sidebar');
 function homePage (h, createPage) {
   const html = hyperx(h);
 
-  createPage('/', 'canhazdb',
+  createPage('/', 'Home',
     html`
       <div class="with-sidebar">
         <div class="content thin">
@@ -53,7 +53,7 @@ function homePage (h, createPage) {
 function docsPage (h, createPage) {
   const html = hyperx(h);
 
-  createPage('/docs', 'canhazdb',
+  createPage('/docs', 'Docs',
     html`
       <div class="with-sidebar">
         <div class="content thin">
