@@ -127,7 +127,7 @@ openssl x509 \
 <p>This command should create the following files in the current working directory.</p>
 <pre><code>192.168.1.6.cert.pem  192.168.1.6.csr.pem  192.168.1.6.privkey.pem  ca.cert.pem  ca.cert.srl  ca.privkey.pem
 </code></pre>
-<h3 id="starting-the-first-node">Starting the first node</h3>
+<h2 id="starting-the-first-node">Starting the first node</h2>
 <p>The following command will start your first canhazdb node in your new cluster.</p>
 <pre><code class="language-bash">docker run -v `pwd`:/app/certs -p 7061:7061 -p 8061:8061 canhazdb/server \
   --driver canhazdb-driver-ejdb \
@@ -143,7 +143,7 @@ openssl x509 \
 <p>Once running, you can start doing GET, POST, PUT, PATCH, DELETE http
 requests at:</p>
 <p><a href="http://192.168.1.6:8060/exampleCollection">http://192.168.1.6:8060/exampleCollection</a></p>
-<h3 id="adding-an-additional-node">Adding an additional node</h3>
+<h2 id="adding-an-additional-node">Adding an additional node</h2>
 <p>The following command will add an additional node node to your new cluster.</p>
 <pre><code class="language-bash">docker run -v `pwd`:/app/certs -p 7062:7062 -p 8062:8062 canhazdb/server \
   --driver canhazdb-driver-ejdb \
