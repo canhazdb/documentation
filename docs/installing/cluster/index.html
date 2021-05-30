@@ -140,9 +140,11 @@ openssl x509 \
   --tls-cert ./certs/192.168.1.6.cert.pem \
   --tls-key ./certs/192.168.1.6.privkey.pem
 </code></pre>
-<p>Once running, you can start doing GET, POST, PUT, PATCH, DELETE http
-requests at:</p>
-<p><a href="http://192.168.1.6:8060/exampleCollection">http://192.168.1.6:8060/exampleCollection</a></p>
+<p>Once running, you can start doing GET, POST, PUT, PATCH, DELETE http requests using an HTTPS client that accepts certificates.</p>
+<p>You will not be able to bypass TLS in your web browser, as the certificates are used for authentication aswell as encryption.</p>
+<p>You can use Postman (or a similar tool) to query the below URL:</p>
+<p><a href="https://192.168.1.6:8060/exampleCollection">https://192.168.1.6:8060/exampleCollection</a></p>
+<p>If using postman, make sure to add the client certificates in Postman&#39;s settings.</p>
 <h2 id="adding-an-additional-node">Adding an additional node</h2>
 <p>The following command will add an additional node node to your new cluster.</p>
 <pre><code class="language-bash">docker run -v `pwd`:/app/certs -p 7062:7062 -p 8062:8062 canhazdb/server \
