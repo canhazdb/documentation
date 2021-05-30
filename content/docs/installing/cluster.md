@@ -77,10 +77,15 @@ docker run -v `pwd`:/app/certs -p 7061:7061 -p 8061:8061 canhazdb/server \
   --tls-key ./certs/192.168.1.6.privkey.pem
 ```
 
-Once running, you can start doing GET, POST, PUT, PATCH, DELETE http
-requests at:
+Once running, you can start doing GET, POST, PUT, PATCH, DELETE http requests using an HTTPS client that accepts certificates.
 
-[http://192.168.1.6:8060/exampleCollection](http://192.168.1.6:8060/exampleCollection)
+You will not be able to bypass TLS in your web browser, as the certificates are used for authentication aswell as encryption.
+
+You can use Postman (or a similar tool) to query the below URL:
+
+https://192.168.1.6:8060/exampleCollection
+
+If using postman, make sure to add the client certificates in Postman's settings.
 
 ## Adding an additional node
 
