@@ -8,7 +8,7 @@ lastModified: 2021-05-27
 
 This document will explain how to setup a secure canhazdb cluster.
 
-## Genearting certificates
+## Generating certificates
 
 To run a secure cluster, we first need to generate some public/private certificates.
 
