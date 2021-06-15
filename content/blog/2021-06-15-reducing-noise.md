@@ -63,7 +63,7 @@ With the new protocol, a node with no results to give can send:
 <Buffer>[0x01, 0x00, 0x06]
 ```
 
-This would mean for a filter that has to go out to a cluster of (for example) 10 nodes, if only 1 node has the document we are looking for, we have only wasted 9 bytes of ingres traffic.
+This would mean for a filter that has to go out to a cluster of (for example) 10 nodes, if only 1 node has the document we are looking for, we have only wasted 9 bytes in the response.
 
 There is much more to do on this, but I'm pretty happy so far. I have even noticed an improvement in the test speeds.
 
