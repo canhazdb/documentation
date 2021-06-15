@@ -92,7 +92,7 @@
 <p>With the new protocol, a node with no results to give can send:</p>
 <pre><code class="language-text">&lt;Buffer&gt;[0x01, 0x00, 0x06]
 </code></pre>
-<p>This would mean for a filter that has to go out to a cluster of (for example) 10 nodes, if only 1 node has the document we are looking for, we have only wasted 9 bytes of ingres traffic.</p>
+<p>This would mean for a filter that has to go out to a cluster of (for example) 10 nodes, if only 1 node has the document we are looking for, we have only wasted 9 bytes in the response.</p>
 <p>There is much more to do on this, but I&#39;m pretty happy so far. I have even noticed an improvement in the test speeds.</p>
 <h3 id="high-availability">High Availability</h3>
 <p>With the rewrite, I&#39;ve currently implemented the <code>info</code>, <code>get</code>, and <code>post</code> commands.</p>
