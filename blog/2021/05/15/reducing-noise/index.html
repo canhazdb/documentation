@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Blog - canhazdb</title>
+    <title>Reducing Noise - canhazdb</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
@@ -108,67 +108,6 @@
 <p>Every field is indexed in canhazdb, and EJDB supports really good and fast indexing. However, you can only use them under certain conditions.</p>
 <p>For this reason I&#39;m considering testing SQLite again, but using a different strategy from last time. I&#39;m concerned though that the overhead of a relational database engine will give a considerable performance loss. But I think it&#39;s worth a test.</p>
 <p>Failing that, I might raise an issue with the EJDB author to find out any better solution for filtering on multiple indexes.</p>
-</div><hr><div class="content-heading"><h1>Performance Bug<small>Published by <a href="https://markwylde.com" target="_blank">Mark Wylde</a> on 2021-06-05</small></h1><div class="content-info"><a target="_blank" class="edit-page" href="https://github.com/canhazdb/documentation/blob/master/content/blog/2021-06-05-performance-bug.md">Edit this page</a><em>Last updated: 2021-06-15</em></div></div><div><p>For the last few months <a href="https://docs.puzed.com/">Puzed</a>, which uses Canhazdb, has been slowing down as time passes. This bug would cause an instance to crash at least once a day.</p>
-<p>I had tried on and off to debug this over the past six months, but my focus was mainly on the Puzed project. This is because Puzed has so much logic, scheduled jobs, healthchecks and more. I was certain there was a leak somewhere in that code.</p>
-<p>But as I mentioned in my previous blog post, I wanted to stress test Canhazdb on it&#39;s own to see what it&#39;s limitations are.</p>
-<p>Starting on Puzed, I added some metrics monitoring to the project. This resulted in the following:</p>
-<h3 id="1-puzed-performance">1) Puzed Performance</h3>
-<p><img src="/img/blog-performance-bug-1.png" alt="screenshot of metrics"></p>
-<p>The above is a snapshot showing the different type of database requests, along with the average time (in milliseconds) it took to complete the request.</p>
-<p>You can see, it gradually takes longer and longer to perform essentially the same number of queries.</p>
-<h3 id="2-canhazdb-performance">2) Canhazdb Performance</h3>
-<p><img src="/img/blog-performance-bug-2.png" alt="screenshot of metrics"></p>
-<p>After a while drilling into the Puzed codebase, I decided to just trying the same metrics testing in a local Canhazdb instance instead.</p>
-<p>To my surprise, Canhazdb was showing similar performance degregation.</p>
-<p>Luckily, the first part of the stack I looked at, was the client. It didn&#39;t take too long to until I discovered <a href="https://github.com/canhazdb/client/commit/cc4e16c859231720bdbc87410ab47a2048221efc">a bug in the client</a>. Everytime a message is sent to the server, it waits for a response. Once it receives a response, I wasn&#39;t cleaning up the callbacks. This was resulting in a huge array that could never empty.</p>
-<h3 id="3-performance-after-fix">3) Performance after fix</h3>
-<p><img src="/img/blog-performance-bug-3.png" alt="screenshot of metrics"></p>
-<p>Finally, with the fix inplace, it looks like the performance is stable and consistent.</p>
-<h3 id="4-puzed-upgrade">4) Puzed upgrade</h3>
-<p><img src="/img/blog-performance-bug-4.png" alt="screenshot of metrics"></p>
-<p>Finally, I upgraded the Canhazdb client dependency in the Puzed API server. This resulted, not only in much lower response times, but the beta server is now up and running for much longer than normal, along with consistent, linear response times.</p>
-</div><hr><div class="content-heading"><h1>Websockets (POST)<small>Published by <a href="https://markwylde.com" target="_blank">Mark Wylde</a> on 2021-06-01</small></h1><div class="content-info"><a target="_blank" class="edit-page" href="https://github.com/canhazdb/documentation/blob/master/content/blog/2021-06-01-websockets-insert.md">Edit this page</a><em>Last updated: 2021-06-15</em></div></div><div><p>I have spent a few days benchmarking thd database, and using new https connections every time, yields around 300 inserts a second, without batching, for a one node cluster.</p>
-<p>Without further testing and comparing to other databases, I&#39;m not sure what to expect right now. But it did lead me to the latest release I&#39;ve done tonight.</p>
-<h2 id="websockets-post">Websockets (POST)</h2>
-<p>Current all internal communication between nodes is done over pure TCP, to reduce the overhead of http headers.</p>
-<p>So the current flow of information goes:</p>
-<p>Client -&gt; HTTPS Handler -&gt; TCP Connection -&gt; Database Driver</p>
-<p>With the new release, the new flow goes:</p>
-<p>Client -&gt; WS Handler -&gt; TCP Connection -&gt; Database Driver</p>
-<p>This should further reduce the overhead of a new connection every time.</p>
-<p>I feel HTTP/2 might further reduce overhead for http requests.</p>
-<h2 id="next-up">Next up</h2>
-<ul>
-<li>I want to continue stress testing, this time using the new web socket posting</li>
-<li>I want to add all methods to the websocket handle</li>
-</ul>
-</div><hr><div class="content-heading"><h1>Stability<small>Published by <a href="https://markwylde.com" target="_blank">Mark Wylde</a> on 2021-05-23</small></h1><div class="content-info"><a target="_blank" class="edit-page" href="https://github.com/canhazdb/documentation/blob/master/content/blog/2021-05-23-stability.md">Edit this page</a><em>Last updated: 2021-06-15</em></div></div><div><p>I have updated the dependencies of canhazdb and worked on this docs website, to:</p>
-<ul>
-<li>improve the branding</li>
-<li>add a new <a href="/guides/making-requests">making-requests</a> guide</li>
-</ul>
-<p>I&#39;ve been using canhazdb for <a href="https://github.com/puzed/puzed-api">puzed</a> and a commercial SaaS ecommerce product.</p>
-<p>While developing, the database has been pretty stable. There have been a few commits over the last six months, but mostly dependency updates and small improvements.</p>
-<p>As the other products are still in development, there&#39;s not really any production workloads going through the database, so it&#39;s still not proven to work with high data loads.</p>
-<h2 id="stress-testing">Stress testing</h2>
-<p>I really want to stress test the project, and think my next steps will be to bombard a local instance with as many requests as I can.</p>
-<p>Hopefully the next blog article will be about those results.</p>
-<h2 id="standalone-executables">Standalone executables</h2>
-<p>A few weeks ago, I also tried to use <a href="https://www.npmjs.com/package/pkg">pkg</a> to create a standalone executable.</p>
-<p>The idea is, you could download straight from the github releases page, the latest version of canhazdb, and just run the database.</p>
-<p>Unfortunatly, this didn&#39;t work out as easy as I&#39;d planned, because of how the drivers are abstracted.</p>
-<p>In the end, I think I might make a release for each official driver. For example:</p>
-<ul>
-<li>canhazdb-x86-linux-ejdb</li>
-<li>canhazdb-x86-darwin-ejdb</li>
-<li>canhazdb-x86-windows-ejdb</li>
-<li>canhazdb-x86-linux-sqlite</li>
-<li>canhazdb-x86-darwin-sqlite</li>
-<li>canhazdb-x86-windows-sqlite</li>
-</ul>
-<p>I would also make docker containers to match the above releases.</p>
-<p>Again, I&#39;m not sure when this will happen, and it might require a bit of code refactoring.</p>
-</div><hr><div class="content-heading"><h1>Introducing canhazdb<small>Published by <a href="https://markwylde.com" target="_blank">Mark Wylde</a> on 2021-02-08</small></h1><div class="content-info"><a target="_blank" class="edit-page" href="https://github.com/canhazdb/documentation/blob/master/content/blog/2021-02-08-introduction.md">Edit this page</a><em>Last updated: 2021-06-15</em></div></div><div><p>Today I finally got around to creating the documentation site.</p>
 </div><hr></section></div></div>
     </main>
   </body>
