@@ -1,0 +1,88 @@
+<html>
+  <head>
+    <title>High Availability Update - canhazdb</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/highlight.min.js" integrity="sha512-zol3kFQ5tnYhL7PzGt0LnllHHVWRGt2bTCIywDiScVvLIlaDOVJ6sPdJTVi0m3rA660RT+yZxkkRzMbb1L8Zkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/languages/javascript.min.js" integrity="sha512-u9dJCEIlcxWLWzlBIBDAO98TI5r1yrxGwRY2vbqFdecd58lamsEgBt1p4sDNBncNUMDV5//WdywRHdhCLx0FJQ==" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+
+    <script>
+      document.addEventListener('DOMContentLoaded', (event) => {
+        document.querySelectorAll('pre code').forEach((block) => {
+          hljs.highlightBlock(block);
+        });
+      });
+
+      function toggleBurgerMenu () {
+        document.body.classList.toggle('burger-open');
+      }
+    </script>
+    <base href="/" />
+
+    <link rel="icon" type="image/png" href="/img/favicon.png" />
+  </head>
+
+  <body>
+    <header class="menu-header">
+      <div class="header-container">
+        <div class="header-brand">
+          <a href="/">
+            <img src="/img/logo.svg" class="logo-icon" />
+            <span>canhazdb</span>
+          </a>
+        </div>
+        <div class="header-burger" onclick="toggleBurgerMenu()">
+          <svg viewBox="0 0 100 80" width="25" height="25">
+            <rect width="100" height="10"></rect>
+            <rect y="30" width="100" height="10"></rect>
+            <rect y="60" width="100" height="10"></rect>
+          </svg>
+        </div>
+        
+    <nav class="bugerable">
+      <a href="/" false>Home</a>
+      <a href="/docs" false>Docs</a>
+      <a href="/blog" class="active">Blog</a>
+      <a href="https://github.com/canhazdb/server/discussions">Community</a>
+    </nav>
+  
+      </div>
+    </header>
+
+    <main>
+      <div class="with-sidebar"><div class="thin content"><sidebar><ul><li><span>August 2021</span><ul><li><span>11</span><a href="/blog/2021/07/11/ha-update">Ha update</a></li></ul></li><li><span>June 2021</span><ul><li><span>15</span><a href="/blog/2021/05/15/reducing-noise">Reducing noise</a></li><li><span>5</span><a href="/blog/2021/05/05/performance-bug">Performance bug</a></li><li><span>1</span><a href="/blog/2021/05/01/websockets-insert">Websockets insert</a></li></ul></li><li><span>May 2021</span><ul><li><span>23</span><a href="/blog/2021/04/23/stability">Stability</a></li></ul></li><li><span>February 2021</span><ul><li><span>8</span><a href="/blog/2021/01/08/introduction">Introduction</a></li></ul></li></ul></sidebar><section><div class="content-heading"><h1>High Availability Update<small>Published by <a href="https://markwylde.com" target="_blank">Mark Wylde</a> on 2021-08-11</small></h1><div class="content-info"><a target="_blank" class="edit-page" href="https://github.com/canhazdb/documentation/blob/master/content/blog/2021-08-11-ha-update.md">Edit this page</a></div></div><div><p>Over the past few months I&#39;ve not had the chance to work on canhazdb as much as I&#39;d like, as my projects that use the first prototype (version 7) is still working really well.</p>
+<p>But over the last week I finally got some time to implement events, known as <code>notify</code>.</p>
+<h3 id="notify">Notify</h3>
+<p>The syntax is still the same as before, but the protocol has now been updated to:</p>
+<ol>
+<li>Use the new lightweight byte syntax, as described in my last blog post</li>
+<li>Each <code>NOTIFY_ON</code> can only have one <code>NOTIFY_PATH</code></li>
+</ol>
+<p>It&#39;s working really well, at least for <code>post</code>&#39;s. I still have some work to do to get <code>put</code>, <code>patch</code>, <code>delete</code> working. These are a little more tricky as one command can mutate multiple documents. With a <code>post</code>, it will only mutate one.</p>
+<h3 id="count">Count</h3>
+<p>The <code>count</code> command was very easy to implement. It&#39;s basically the same logic as a <code>get</code>, but instead of returning the documents, it returns just the number from each server.</p>
+<h3 id="lock">Lock</h3>
+<p>Before I could implement the <code>put</code>, <code>patch</code> and <code>delete</code> commands we need locking.</p>
+<p>I&#39;m not entirely sure if this lock is needed. But because these commands trigger updates on <em>multiple</em> document replicas, I feel it&#39;s important that all replicas contain the same value.</p>
+<p>So for now, when one of these three commands is sent, a lock will be placed on the collection while all documents are mutated, and then removed once complete.</p>
+<p>I feel like when transactions are implemented further down the line, this could be removed, or at least change shape in some way.</p>
+<h3 id="put-patch-delete">Put, Patch, Delete</h3>
+<p>The <code>put</code>, <code>patch</code> and <code>delete</code> commands are similar to a <code>post</code>, but instead of choose three random servers to insert a document, we must go out to all servers and request updates.</p>
+<p>With the built in $REPLICATION_FACTOR (currenly 3), if you have 3 or more servers, then each document will be inserted on each of the 3 servers.</p>
+<p>So when one of these commands is issued externally, the server looks up every server in the cluster, and forwards the command.</p>
+<p>The internal server needs to reply with the number of changes it made. However, it can&#39;t simply send how many document where updated. If we have 3 documents, each replicated 3 times, then our total change count would be 9.</p>
+<p>Instead, the internal server will only respond with the documents it changed, where it was the first &quot;online&quot; server in the <code>_replicatedNodes</code> property.</p>
+<h3 id="system-statistics">System Statistics</h3>
+<p>The <code>system.tables</code> collection has not been implemented at all. I think it will be pretty easy to implement, as most of the logic from v7 can be carried over.</p>
+</div><hr></section></div></div>
+    </main>
+  </body>
+</html>
