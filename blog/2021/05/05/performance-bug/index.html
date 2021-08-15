@@ -62,19 +62,19 @@
 <p>I had tried on and off to debug this over the past six months, but my focus was mainly on the Puzed project. This is because Puzed has so much logic, scheduled jobs, healthchecks and more. I was certain there was a leak somewhere in that code.</p>
 <p>But as I mentioned in my previous blog post, I wanted to stress test Canhazdb on it&#39;s own to see what it&#39;s limitations are.</p>
 <p>Starting on Puzed, I added some metrics monitoring to the project. This resulted in the following:</p>
-<h3 id="1-puzed-performance">1) Puzed Performance</h3>
+<h2 id="1-puzed-performance">1) Puzed Performance</h2>
 <p><img src="/img/blog-performance-bug-1.png" alt="screenshot of metrics"></p>
 <p>The above is a snapshot showing the different type of database requests, along with the average time (in milliseconds) it took to complete the request.</p>
 <p>You can see, it gradually takes longer and longer to perform essentially the same number of queries.</p>
-<h3 id="2-canhazdb-performance">2) Canhazdb Performance</h3>
+<h2 id="2-canhazdb-performance">2) Canhazdb Performance</h2>
 <p><img src="/img/blog-performance-bug-2.png" alt="screenshot of metrics"></p>
 <p>After a while drilling into the Puzed codebase, I decided to just trying the same metrics testing in a local Canhazdb instance instead.</p>
 <p>To my surprise, Canhazdb was showing similar performance degregation.</p>
 <p>Luckily, the first part of the stack I looked at, was the client. It didn&#39;t take too long to until I discovered <a href="https://github.com/canhazdb/client/commit/cc4e16c859231720bdbc87410ab47a2048221efc">a bug in the client</a>. Everytime a message is sent to the server, it waits for a response. Once it receives a response, I wasn&#39;t cleaning up the callbacks. This was resulting in a huge array that could never empty.</p>
-<h3 id="3-performance-after-fix">3) Performance after fix</h3>
+<h2 id="3-performance-after-fix">3) Performance after fix</h2>
 <p><img src="/img/blog-performance-bug-3.png" alt="screenshot of metrics"></p>
 <p>Finally, with the fix inplace, it looks like the performance is stable and consistent.</p>
-<h3 id="4-puzed-upgrade">4) Puzed upgrade</h3>
+<h2 id="4-puzed-upgrade">4) Puzed upgrade</h2>
 <p><img src="/img/blog-performance-bug-4.png" alt="screenshot of metrics"></p>
 <p>Finally, I upgraded the Canhazdb client dependency in the Puzed API server. This resulted, not only in much lower response times, but the beta server is now up and running for much longer than normal, along with consistent, linear response times.</p>
 </div><hr></section></div></div>

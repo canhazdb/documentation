@@ -62,10 +62,10 @@
 <p>There&#39;s still some unknowns, but in general I feel I&#39;ve got a good idea of where I want it to go.</p>
 <p>This week I started a new branch, which is essentially a complete rewrite of the server.</p>
 <p>Some major changes are in that branch:</p>
-<h3 id="no-httpswss-servers">No http(s)/ws(s) servers</h3>
+<h2 id="no-httpswss-servers">No http(s)/ws(s) servers</h2>
 <p>When I wrote the first version, I kept juggling between the http(s) server, and the tcp servers. I decided for the rewrite, they really shouldn&#39;t have anything to do with each other.</p>
 <p>I still want canhazdb to come with the option of a lightweight http server, but I&#39;ll put it in at the end, and it&#39;ll be abstracted out a lot more.</p>
-<h3 id="protocol-rewrite">Protocol rewrite</h3>
+<h2 id="protocol-rewrite">Protocol rewrite</h2>
 <p>The current stable version talks exclusively over JSON. So every time a node is asked to do something, it must receive the command in JSON and send a respones in JSON.</p>
 <p>I still believe the biggest risk to the theory of canhazdb is network noise. Specially the noise of nodes that have no data to send back.</p>
 <p>For example, when filtering on records (GET:/exampleCollection), a request is sent out to all nodes. In the current version is looks like this:</p>
@@ -94,16 +94,16 @@
 </code></pre>
 <p>This would mean for a filter that has to go out to a cluster of (for example) 10 nodes, if only 1 node has the document we are looking for, we have only wasted 9 bytes in the response.</p>
 <p>There is much more to do on this, but I&#39;m pretty happy so far. I have even noticed an improvement in the test speeds.</p>
-<h3 id="high-availability">High Availability</h3>
+<h2 id="high-availability">High Availability</h2>
 <p>With the rewrite, I&#39;ve currently implemented the <code>info</code>, <code>get</code>, and <code>post</code> commands.</p>
-<h4 id="posts">POST&#39;s</h4>
+<h3 id="posts">POST&#39;s</h3>
 <p>Performing a <code>POST</code> is one of the easiest commands on a database. The logic is basically, select $REPLICATION_FACTOR nodes at random (default 3), and insert the document.</p>
 <p>Along with the document, each node is also told about all other nodes holding that replica.</p>
-<h4 id="gets">GET&#39;s</h4>
+<h3 id="gets">GET&#39;s</h3>
 <p>When performing a <code>GET</code>, the request still gets forwarded to every node in the cluster. However, now, a node will only return a document, if they are the first healthy node in the documents replica list.</p>
 <p>So far this is all working really well, and I&#39;m happy with the performance (for now).</p>
 <p>My next steps will be to implement locking again (as this is needed for PUT/PATCH/DELETE&#39;s), and then implement the rest of the commands.</p>
-<h3 id="ejdb-vs-sqlite">EJDB vs SQLite</h3>
+<h2 id="ejdb-vs-sqlite">EJDB vs SQLite</h2>
 <p>One thing that&#39;s been bothering me about EJDB is the restriction on indexing.</p>
 <p>Every field is indexed in canhazdb, and EJDB supports really good and fast indexing. However, you can only use them under certain conditions.</p>
 <p>For this reason I&#39;m considering testing SQLite again, but using a different strategy from last time. I&#39;m concerned though that the overhead of a relational database engine will give a considerable performance loss. But I think it&#39;s worth a test.</p>

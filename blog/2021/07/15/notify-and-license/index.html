@@ -70,11 +70,14 @@
 }
 </code></pre>
 <p>But ideally, this needs to <em>also</em> take into consideration if the actual primary replica is offline/unhealthy. I&#39;ll get to that later.</p>
-<h1 id="license-change">License change</h1>
+<h2 id="license-change">License change</h2>
 <p>The main project is deliberately licensed as <a href="https://github.com/canhazdb/server/blob/master/LICENSE">AGPL-3</a>, but I realised the client library was also licensed as AGPL-3 too.</p>
 <p>That was not my intention. If you want to use the canhazdb client library, you do not have to release your entire app as AGPL-3. For example, if you run a canhazdb server cluster, and then build a separate app that talks to the server (either using the client library or your own), the project does not have to be licensed as <a href="https://github.com/canhazdb/server/blob/master/LICENSE">AGPL-3</a>.</p>
 <p>Therefore, I have changed the <a href="https://github.com/canhazdb/client">canhazdb client</a> license to be <a href="https://github.com/canhazdb/client/blob/master/LICENSE">MIT</a>.</p>
 <p>Note, the license of the <a href="https://github.com/canhazdb/client">canhazdb server</a> is still <a href="https://github.com/canhazdb/server/blob/master/LICENSE">AGPL-3</a>. The intention being, if you make any changes to the server or embed it into another product, the project should be licensed as <a href="https://github.com/canhazdb/server/blob/master/LICENSE">AGPL-3</a> and source code released.</p>
+<h2 id="next---statistics">Next - Statistics</h2>
+<p>The last major feature for me to implement is the <code>system.collections</code> collection. I&#39;ll try to get that completed this week.</p>
+<p>Once that&#39;s finished, I&#39;m going to embed a very simple http server (without websocket notify support). Then finally, I can get the <a href="https://github.com/canhazdb/server/tree/ha">ha branch</a> into master. Milestone reached!</p>
 </div><hr></section></div></div>
     </main>
   </body>
