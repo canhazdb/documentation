@@ -12,12 +12,12 @@ This week I started a new branch, which is essentially a complete rewrite of the
 
 Some major changes are in that branch:
 
-### No http(s)/ws(s) servers
+## No http(s)/ws(s) servers
 When I wrote the first version, I kept juggling between the http(s) server, and the tcp servers. I decided for the rewrite, they really shouldn't have anything to do with each other.
 
 I still want canhazdb to come with the option of a lightweight http server, but I'll put it in at the end, and it'll be abstracted out a lot more.
 
-### Protocol rewrite
+## Protocol rewrite
 The current stable version talks exclusively over JSON. So every time a node is asked to do something, it must receive the command in JSON and send a respones in JSON.
 
 I still believe the biggest risk to the theory of canhazdb is network noise. Specially the noise of nodes that have no data to send back.
@@ -67,22 +67,22 @@ This would mean for a filter that has to go out to a cluster of (for example) 10
 
 There is much more to do on this, but I'm pretty happy so far. I have even noticed an improvement in the test speeds.
 
-### High Availability
+## High Availability
 With the rewrite, I've currently implemented the `info`, `get`, and `post` commands.
 
-#### POST's
+### POST's
 Performing a `POST` is one of the easiest commands on a database. The logic is basically, select $REPLICATION_FACTOR nodes at random (default 3), and insert the document.
 
 Along with the document, each node is also told about all other nodes holding that replica.
 
-#### GET's
+### GET's
 When performing a `GET`, the request still gets forwarded to every node in the cluster. However, now, a node will only return a document, if they are the first healthy node in the documents replica list.
 
 So far this is all working really well, and I'm happy with the performance (for now).
 
 My next steps will be to implement locking again (as this is needed for PUT/PATCH/DELETE's), and then implement the rest of the commands.
 
-### EJDB vs SQLite
+## EJDB vs SQLite
 One thing that's been bothering me about EJDB is the restriction on indexing.
 
 Every field is indexed in canhazdb, and EJDB supports really good and fast indexing. However, you can only use them under certain conditions.
