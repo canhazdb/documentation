@@ -74,8 +74,8 @@ module.exports = async function generateBlog (h, createPage) {
 
     const entryTree = h('',
       h('div', { class: 'content-heading' },
-        h('h1',
-          metadata.title,
+        h('h1', { id: `${metadata.title}` },
+          h('a', { href: `/blog/#${metadata.title}` }, metadata.title),
           h('small', 'Published by ',
             h('a', { href: metadata.authorURL, target: '_blank' }, metadata.author),
             ' on ',
