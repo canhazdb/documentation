@@ -26,12 +26,6 @@ module.exports = function (h) {
             <li><a href="/docs/contributing/developing">Developing</a></li>
           </ul>
         </li>
-        <li>
-          <span>Architecture</span>
-          <ul>
-            <li><a href="/docs/architecture/drivers">Drivers</a></li>
-          </ul>
-        </li>
       </ul>
     </sidebar>
   `;

@@ -25,13 +25,19 @@ function homePage (h, createPage) {
             <p>
               You can run the command below on any machine that has docker installed:
             </p>
-            <pre><code class="language-bash">docker run -itp 8060:8060 canhazdb/server --single</code></pre>
+            <pre><code class="language-bash">docker run --name canhazdb -dp 8060:8060 canhazdb/server</code></pre>
             <p>
-              Once running, you can start doing GET, POST, PUT, PATCH, DELETE http
-              requests at:
+              Once running, you can open a REPL inside the container
             </p>
-            <a href="http://localhost:8060/exampleCollection">http://localhost:8060/exampleCollection</a>
-
+            <pre><code class="language-bash">docker exec -it canhazdb node repl.js</code></pre>
+            <p>
+              Try creating a new document:
+            </p>
+            <pre><code class="language-javascript">await db.post('tests', { foo: 'bar' })</code></pre>
+            <p>
+              Then retrieve it:
+            </p>
+            <pre><code class="language-javascript">await db.getAll('tests')</code></pre>
             <h2>Learn more?</h2>
             <p>
               You can start your learning journey on the 

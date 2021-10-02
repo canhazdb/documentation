@@ -3,7 +3,7 @@ id: install
 title: Cluster
 sidebar_label: Cluster
 path: Docs / Installing / Cluster
-lastModified: 2021-05-27
+lastModified: 2021-07-01
 ---
 
 This document will explain how to setup a secure canhazdb cluster.
@@ -66,10 +66,8 @@ The following command will start your first canhazdb node in your new cluster.
 
 ```bash
 docker run -v `pwd`:/app/certs -p 7061:7061 -p 8061:8061 canhazdb/server \
-  --driver canhazdb-driver-ejdb \
   --host 192.168.1.6 \
   --port 7061 \
-  --query-port 8061 \
   --join 192.168.1.6:7061 \
   --data-dir ./canhazdb/one \
   --tls-ca ./certs/ca.cert.pem \
@@ -93,10 +91,8 @@ The following command will add an additional node node to your new cluster.
 
 ```bash
 docker run -v `pwd`:/app/certs -p 7062:7062 -p 8062:8062 canhazdb/server \
-  --driver canhazdb-driver-ejdb \
   --host 192.168.1.6 \
   --port 7062 \
-  --query-port 8062 \
   --join 192.168.1.6:7061 \
   --join 192.168.1.6:7062 \
   --data-dir ./canhazdb/two \

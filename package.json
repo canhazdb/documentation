@@ -12,13 +12,13 @@
   "author": "",
   "license": "AGPL-3",
   "devDependencies": {
-    "date-fns": "^2.21.3",
-    "glob": "^7.1.7",
+    "date-fns": "^2.24.0",
+    "glob": "^7.2.0",
     "hyperhtml": "^2.34.0",
     "hyperx": "^2.5.4",
-    "local-web-server": "^4.2.1",
-    "marked": "^2.0.5",
-    "nodemon": "^2.0.7",
+    "local-web-server": "^5.1.1",
+    "marked": "^3.0.4",
+    "nodemon": "^2.0.13",
     "vhtml": "^2.2.0",
     "virtual-dom": "^2.1.1"
   },
