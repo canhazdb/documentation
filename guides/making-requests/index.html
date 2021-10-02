@@ -89,15 +89,15 @@
       </ul>
     </sidebar><section><h1>Making Requests<small></small></h1><div class="content-info"><a target="_blank" class="edit-page" href="https://github.com/canhazdb/documentation/blob/master/content/guides/making-requests.md">Edit this page</a><em>Last updated: 2021-05-24</em></div><div><p>You can make requests using any http library in any language. For this example
 we&#39;ll use JavaScript, as you can test it right in the browser of your local machine.</p>
-<h1 id="1-run-a-local-server">1) Run a local server</h1>
+<h2 id="1-run-a-local-server">1) Run a local server</h2>
 <p>If you don&#39;t already have a canhazdb server to play with, you can use docker to
 quickly bring up a single test instance.</p>
 <pre><code class="language-bash">docker run -itp 8060:8060 canhazdb/server --single</code></pre>
 
-<h1 id="2-open-your-browser">2) Open your browser</h1>
+<h2 id="2-open-your-browser">2) Open your browser</h2>
 <p>In Chromium, navigate to <a href="http://localhost:8060/">http://localhost:8060/</a> and open the devtools.</p>
 <p>You should see some basic information about your server, such as the version and name.</p>
-<h1 id="3-list-documents">3) List documents</h1>
+<h2 id="3-list-documents">3) List documents</h2>
 <p>In the DevTools console, enter the following code:</p>
 <pre><code class="language-javascript">fetch(&#39;/tests&#39;)
   .then(response =&gt; response.json())
@@ -105,7 +105,7 @@ quickly bring up a single test instance.</p>
 </code></pre>
 <p>This will list all the documents in the <code>tests</code> collection. Of course, at this stage we
 won&#39;t have any, so this should return an empty array.</p>
-<h1 id="4-create-a-document">4) Create a document</h1>
+<h2 id="4-create-a-document">4) Create a document</h2>
 <p>In the DevTools console, enter the following code:</p>
 <pre><code class="language-javascript">fetch(&#39;/tests&#39;, {
   method: &#39;post&#39;,
@@ -118,7 +118,7 @@ won&#39;t have any, so this should return an empty array.</p>
 </code></pre>
 <p>This will create a new document in the <code>tests</code> collection. If it works successfully, if will return
 the new document, with an <code>id</code> field.</p>
-<h1 id="5-list-your-document-again">5) List your document again</h1>
+<h2 id="5-list-your-document-again">5) List your document again</h2>
 <p>In the DevTools console, enter the following code:</p>
 <pre><code class="language-javascript">fetch(&#39;/tests&#39;)
   .then(response =&gt; response.json())
