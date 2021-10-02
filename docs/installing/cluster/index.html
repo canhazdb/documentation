@@ -80,14 +80,8 @@
             <li><a href="/docs/contributing/developing">Developing</a></li>
           </ul>
         </li>
-        <li>
-          <span>Architecture</span>
-          <ul>
-            <li><a href="/docs/architecture/drivers">Drivers</a></li>
-          </ul>
-        </li>
       </ul>
-    </sidebar><section><h1>Cluster<small></small></h1><div class="content-info"><a target="_blank" class="edit-page" href="https://github.com/canhazdb/documentation/blob/master/content/docs/installing/cluster.md">Edit this page</a><em>Last updated: 2021-05-27</em></div><div><p>This document will explain how to setup a secure canhazdb cluster.</p>
+    </sidebar><section><h1>Cluster<small></small></h1><div class="content-info"><a target="_blank" class="edit-page" href="https://github.com/canhazdb/documentation/blob/master/content/docs/installing/cluster.md">Edit this page</a><em>Last updated: 2021-07-01</em></div><div><p>This document will explain how to setup a secure canhazdb cluster.</p>
 <h2 id="generating-certificates">Generating certificates</h2>
 <p>To run a secure cluster, we first need to generate some public/private certificates.</p>
 <p>For this example, I&#39;ll create a folder in my documents.</p>
@@ -130,10 +124,8 @@ openssl x509 \
 <h2 id="starting-the-first-node">Starting the first node</h2>
 <p>The following command will start your first canhazdb node in your new cluster.</p>
 <pre><code class="language-bash">docker run -v `pwd`:/app/certs -p 7061:7061 -p 8061:8061 canhazdb/server \
-  --driver canhazdb-driver-ejdb \
   --host 192.168.1.6 \
   --port 7061 \
-  --query-port 8061 \
   --join 192.168.1.6:7061 \
   --data-dir ./canhazdb/one \
   --tls-ca ./certs/ca.cert.pem \
@@ -148,10 +140,8 @@ openssl x509 \
 <h2 id="adding-an-additional-node">Adding an additional node</h2>
 <p>The following command will add an additional node node to your new cluster.</p>
 <pre><code class="language-bash">docker run -v `pwd`:/app/certs -p 7062:7062 -p 8062:8062 canhazdb/server \
-  --driver canhazdb-driver-ejdb \
   --host 192.168.1.6 \
   --port 7062 \
-  --query-port 8062 \
   --join 192.168.1.6:7061 \
   --join 192.168.1.6:7062 \
   --data-dir ./canhazdb/two \
